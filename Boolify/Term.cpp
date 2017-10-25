@@ -2,13 +2,17 @@
 #include "Term.h"
 
 
-char literal;
-bool negated;
 std::vector<Term> children;
 
-Term::Term(char lit)
+Term::Term(char name)
 {
-	literal = lit;
+	lit = new char;
+	*lit = name;
+}
+
+Term::Term(const Term &obj) {
+	lit = new char;
+	*lit = *obj.lit;
 }
 
 
@@ -17,7 +21,7 @@ Term::~Term()
 }
 
 char Term::getLiteral() {
-	return literal;
+	return *lit;
 }
 
 bool Term::isNegated() {
@@ -25,7 +29,8 @@ bool Term::isNegated() {
 }
 
 void Term::negate() {
-	negated = true;
+	negated = new bool;
+	*negated = true;
 }
 
 void Term::addChild(Term t) {
