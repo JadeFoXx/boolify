@@ -30,11 +30,12 @@ int RecursiveDecentParser::and(int a, int b) {
 }
 
 char RecursiveDecentParser::peek() {
-	return *expression;
+	return (*expression)[index];
 }
 
 char RecursiveDecentParser::next() {
-	return *expression++;
+	index++;
+	return (*expression)[index-1];
 }
 
 int RecursiveDecentParser::number() {
@@ -77,7 +78,11 @@ int RecursiveDecentParser::term() {
 	return result;
 }
 
-int RecursiveDecentParser::evaluate(string expression) {
-	this->expression = expression.c_str();
+int RecursiveDecentParser::evaluate(string exp) {
+	delete expression;
+	expression = new vector<char>;
+	for (unsigned i = 0; i < exp.size(); i++) {
+		expression->push_back(exp[i]);
+	}
 	return term();
 }

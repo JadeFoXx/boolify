@@ -7,10 +7,13 @@ using std::string;
 class Term
 {
 public:
-	Term();
+	Term(string expression);
 	~Term();
+	string getExpression();
+	vector<char> getLiterals();
+	int size();
 private:
-	string *expression;
+	string expression;
 	vector<char> *literals;
 };
 

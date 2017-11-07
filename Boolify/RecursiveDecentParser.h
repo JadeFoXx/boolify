@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
 using std::string;
+using std::vector;
 class RecursiveDecentParser
 {
 public:
@@ -8,7 +10,7 @@ public:
 	~RecursiveDecentParser();
 	int evaluate(string expr);
 private:
-	const char *expression;
+	vector<char> *expression;
 	bool isNumber(char c);
 	int negate(int i);
 	int or (int a, int b);
@@ -18,5 +20,6 @@ private:
 	int number();
 	int factor();
 	int term();
+	int index;
 };
 
