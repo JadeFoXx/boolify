@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "RecursiveDecentParser.h"
 
-
+//////////////////////////////////////////////////
 RecursiveDecentParser::RecursiveDecentParser()
 {
 }
 
+//////////////////////////////////////////////////
 RecursiveDecentParser::~RecursiveDecentParser()
 {
 }

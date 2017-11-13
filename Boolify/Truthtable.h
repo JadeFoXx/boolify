@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Term.h"
+#include "RecursiveDecentParser.h"
 
 using std::string;
 using std::vector;
@@ -8,14 +10,21 @@ using std::vector;
 class Truthtable
 {
 public:
-	Truthtable(int n);
+	Truthtable(Term, RecursiveDecentParser);
 	~Truthtable();
 	vector<vector<int>> getTable() const;
-	vector<int> getP() const;
-	void addToP(int);
+	string getDNF();
+	string getKNF();
 private:
+	Term term;
 	vector<vector<int>> table;
-	vector<int> p;
+	string dnf;
+	string knf;
+	vector<vector<char>> minTermBits;
 	void generate(int n);
+	void solve(RecursiveDecentParser);
+	void buildDNF();
+	void buildKNF();
+	void minify(vector<vector<char>>);
 };
 

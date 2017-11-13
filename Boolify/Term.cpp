@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Term.h"
 
-
+//////////////////////////////////////////////////
 Term::Term(string exp)
 {
 	expression = exp;
@@ -11,9 +11,11 @@ Term::Term(string exp)
 			literals->push_back(exp[i]);
 		}
 	}
+	cCount = exp.length();
+	lCount = literals->size();
 }
 
-
+//////////////////////////////////////////////////
 Term::~Term()
 {
 }
@@ -29,6 +31,11 @@ vector<char> Term::getLiterals() {
 }
 
 //////////////////////////////////////////////////
-int Term::size() {
-	return expression.length();
+int Term::charCount() {
+	return cCount;
+}
+
+//////////////////////////////////////////////////
+int Term::litCount() {
+	return lCount;
 }

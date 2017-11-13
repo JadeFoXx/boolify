@@ -1,5 +1,5 @@
 ﻿  Boolify.cpp
-e:\code\current\boolify\boolify\boolify.cpp(33): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\boolify.cpp(50): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\boolify.cpp(61): warning C4018: '<': signed/unsigned mismatch
-  Boolify.vcxproj -> E:\Code\Current\boolify\Boolify\Debug\Boolify.exe
+f:\code\current\boolify\boolify\boolify.cpp(32): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\boolify.cpp(38): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\boolify.cpp(39): warning C4018: '<=': signed/unsigned mismatch
+  Boolify.vcxproj -> F:\Code\current\boolify\Boolify\Debug\Boolify.exe
