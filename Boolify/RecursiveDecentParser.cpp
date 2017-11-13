@@ -10,14 +10,17 @@ RecursiveDecentParser::~RecursiveDecentParser()
 {
 }
 
+//////////////////////////////////////////////////
 bool RecursiveDecentParser::isNumber(char c) {
 	return c >= '0' && c <= '9';
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::negate(int v) {
 	return abs(v - 1);
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::or (int a, int b) {
 	if ((a + b) >= 1) {
 		return 1;
@@ -25,27 +28,36 @@ int RecursiveDecentParser::or (int a, int b) {
 	return 0;
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::and(int a, int b) {
 	return a*b;
 }
 
+//////////////////////////////////////////////////
 char RecursiveDecentParser::peek() {
-	return (*expression)[index];
+	if (index < expression->size()) {
+		return (*expression)[index];
+	}
+	return false;
 }
 
+//////////////////////////////////////////////////
 char RecursiveDecentParser::next() {
+	char c = (*expression)[index];
 	index++;
-	return (*expression)[index-1];
+	return c;
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::number() {
 	int result = next() -'0';
-	while (isNumber(peek())) {
+	while (peek() && isNumber(peek())) {
 		result = 10 * result + next() - '0';
 	}
 	return result;
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::factor() {
 	if (isNumber(peek())) {
 		return number();
@@ -63,6 +75,7 @@ int RecursiveDecentParser::factor() {
 	return 0;
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::term() {
 	int result = factor();
 	while (peek() == '*' || peek() == '+') {
@@ -78,10 +91,12 @@ int RecursiveDecentParser::term() {
 	return result;
 }
 
+//////////////////////////////////////////////////
 int RecursiveDecentParser::evaluate(string exp) {
 	delete expression;
+	index = 0;
 	expression = new vector<char>;
-	for (unsigned i = 0; i < exp.size(); i++) {
+	for (unsigned i = 0; i < exp.length(); i++) {
 		expression->push_back(exp[i]);
 	}
 	return term();

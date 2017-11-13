@@ -12,6 +12,7 @@ public:
 	~Truthtable();
 	vector<vector<int>> getTable() const;
 	vector<int> getP() const;
+	void addToP(int);
 private:
 	vector<vector<int>> table;
 	vector<int> p;

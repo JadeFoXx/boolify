@@ -18,14 +18,17 @@ Term::~Term()
 {
 }
 
+//////////////////////////////////////////////////
 string Term::getExpression() {
 	return expression;
 }
 
+//////////////////////////////////////////////////
 vector<char> Term::getLiterals() {
 	return *literals;
 }
 
+//////////////////////////////////////////////////
 int Term::size() {
-	return expression.size();
+	return expression.length();
 }

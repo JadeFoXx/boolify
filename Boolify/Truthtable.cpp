@@ -10,17 +10,25 @@ Truthtable::~Truthtable()
 {
 }
 
+//////////////////////////////////////////////////
 vector<vector<int>> Truthtable::getTable() const {
 	return table;
 }
 
+//////////////////////////////////////////////////
 vector<int> Truthtable::getP() const {
 	return p;
 }
 
+//////////////////////////////////////////////////
+void Truthtable::addToP(int i) {
+	p.push_back(i);
+}
+
+//////////////////////////////////////////////////
 void Truthtable::generate(const int n) {
 	table = vector<vector<int>>(n, vector<int>(1 << n));
-	p = vector<int> (1 << n);
+	p = vector<int>();
 	unsigned number_to_fill = 1U << (n - 1);
 	for (unsigned col = 0; col < n; col++, number_to_fill >>= 1U) {
 		for (unsigned row = number_to_fill; row < (1U << n); row += (number_to_fill * 2)) {
