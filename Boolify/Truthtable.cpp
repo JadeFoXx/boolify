@@ -10,6 +10,7 @@ Truthtable::Truthtable(Term t, RecursiveDecentParser rdp) : term(t), dnf(""), kn
 	solve(rdp);
 	buildDNF();
 	buildKNF();
+	vector<Minterm> pI = getPrimeImplicants(startTerms);
 }
 
 //////////////////////////////////////////////////
@@ -49,9 +50,11 @@ void Truthtable::solve(RecursiveDecentParser rdp) {
 
 //////////////////////////////////////////////////
 void Truthtable::buildDNF() {
-	for (unsigned i = 0; i < (1 << term.litCount()); i++) {
+	for (int i = 0; i < (1 << term.litCount()); i++) {
 		if (table[term.litCount()][i] == 1) {
 			vector<char> bits;
+			vector<int> index;
+			index.push_back(i);
 			dnf += '(';
 			for (unsigned j = 0; j < term.litCount(); j++) {
 				if (table[j][i] == 1) {
@@ -67,7 +70,8 @@ void Truthtable::buildDNF() {
 					dnf += '*';
 				}
 			}
-			minTermBits.push_back(bits);
+			Minterm m(index, bits);
+			startTerms.push_back(m);
 			dnf += ')';
 			dnf += '+';
 		}
@@ -100,56 +104,61 @@ void Truthtable::buildKNF() {
 }
 
 //////////////////////////////////////////////////
-string Truthtable::getDNF() {
+string Truthtable::getDNF() const {
 	return dnf;
 }
 
 //////////////////////////////////////////////////
-string Truthtable::getKNF() {
+string Truthtable::getKNF() const {
 	return knf;
 }
 
 //////////////////////////////////////////////////
-void Truthtable::minify(vector<vector<char>> bits) {
-	map<vector<char>, vector<char>> implicants;
+vector<Minterm> Truthtable::getPrimeImplicants(vector<Minterm> minTerms) {
+	vector<Minterm> primeImplicants;
 	bool didWork = false;
-	for (unsigned i = 0; i < bits.size(); i++) {
-		if (bits[i][0] != '*') {
-			bool couldCombine = false;
-			for (unsigned j = i; j < bits.size(); j++) {
-				if (j != i) {
-					unsigned diff = 0;
-					unsigned diffIndex = 0;
-					for (unsigned k = 0; k < bits[i].size(); k++) {
-						if (bits[i][k] != bits[j][k]) {
-							diff++;
-							diffIndex = k;
+	for (unsigned i = 0; i < minTerms.size(); i++) {
+		for (unsigned j = 0; j < minTerms.size(); j++) {
+			vector<int> implicantIndex;
+			vector<char> implicantBit;
+			if (j != i) {
+				bool prime = true;
+				unsigned diff = 0;
+				implicantIndex = joinVectorNoDupes(minTerms[i].getIndex(), minTerms[j].getIndex());
+				for (unsigned k = 0; k < minTerms[i].getBit().size(); k++) {
+					if (minTerms[i].getBit()[k] != minTerms[j].getBit()[k]) {
+						diff++;
+						implicantBit.push_back('-');
+					}
+					else {
+						implicantBit.push_back(minTerms[i].getBit()[k]);
+					}
+				}
+				if (diff == 1) {
+					prime = false;
+					Minterm mT(implicantIndex, implicantBit);
+					bool dupe = false;
+					for (Minterm m : primeImplicants) {
+						if (m.equals(mT)) {
+							dupe = true;
 						}
 					}
-					if (diff == 1) {
-						couldCombine = true;
-						vector<char> implicant;
-						for (unsigned k = 0; k < bits[i].size(); k++) {
-							if (k == diffIndex) {
-								implicant.push_back('-');
-							}
-							else {
-								implicant.push_back(bits[i][k]);
-							}
-						}
-						implicants.push_back(implicant);
+					if (!dupe) {
+						primeImplicants.push_back(mT);
 						didWork = true;
 					}
 				}
-			}
-			if (!couldCombine) {
-				bits[i].insert(bits[i].begin(), '*');
-				implicants.push_back(bits[i]);
-				didWork = true;
+				if (prime) {
+					primeImplicants.push_back(minTerms[i]);
+				}
 			}
 		}
+		
 	}
 	if (didWork) {
-		minify(implicants);
+		return getPrimeImplicants(primeImplicants);
+	}
+	else {
+		return primeImplicants;
 	}
 }

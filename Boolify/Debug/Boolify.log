@@ -1,5 +1,13 @@
-﻿  Boolify.cpp
-f:\code\current\boolify\boolify\boolify.cpp(32): warning C4018: '<': signed/unsigned mismatch
-f:\code\current\boolify\boolify\boolify.cpp(38): warning C4018: '<': signed/unsigned mismatch
-f:\code\current\boolify\boolify\boolify.cpp(39): warning C4018: '<=': signed/unsigned mismatch
+﻿  Truthtable.cpp
+f:\code\current\boolify\boolify\truthtable.cpp(30): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(39): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(41): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(59): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(84): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(87): warning C4018: '<': signed/unsigned mismatch
+f:\code\current\boolify\boolify\truthtable.cpp(95): warning C4018: '<': signed/unsigned mismatch
+  Minterm.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Boolify.cpp
   Boolify.vcxproj -> F:\Code\current\boolify\Boolify\Debug\Boolify.exe
