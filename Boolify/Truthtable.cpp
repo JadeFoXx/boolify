@@ -11,6 +11,7 @@ Truthtable::Truthtable(Term t, RecursiveDecentParser rdp) : term(t), dnf(""), kn
 	buildDNF();
 	buildKNF();
 	vector<Minterm> pI = getPrimeImplicants(startTerms);
+
 }
 
 //////////////////////////////////////////////////
@@ -116,49 +117,103 @@ string Truthtable::getKNF() const {
 //////////////////////////////////////////////////
 vector<Minterm> Truthtable::getPrimeImplicants(vector<Minterm> minTerms) {
 	vector<Minterm> primeImplicants;
-	bool didWork = false;
-	for (unsigned i = 0; i < minTerms.size(); i++) {
-		for (unsigned j = 0; j < minTerms.size(); j++) {
-			vector<int> implicantIndex;
-			vector<char> implicantBit;
-			if (j != i) {
-				bool prime = true;
-				unsigned diff = 0;
-				implicantIndex = joinVectorNoDupes(minTerms[i].getIndex(), minTerms[j].getIndex());
-				for (unsigned k = 0; k < minTerms[i].getBit().size(); k++) {
-					if (minTerms[i].getBit()[k] != minTerms[j].getBit()[k]) {
-						diff++;
-						implicantBit.push_back('-');
-					}
-					else {
-						implicantBit.push_back(minTerms[i].getBit()[k]);
-					}
+	for (unsigned i = 0; i < minTerms.size() - 1; i++) {
+		for (unsigned j = i + 1; j < minTerms.size(); j++) {
+			vector<int> cIndex = joinVectorNoDupes(minTerms[i].getIndices(), minTerms[j].getIndices());
+			vector<char> cBits;
+			unsigned diff = 0;
+			for (unsigned k = 0; k < minTerms[i].getBits().size(); k++) {
+				if (minTerms[i].getBits()[k] != minTerms[j].getBits()[k]) {
+					diff++;
+					cBits.push_back('-');
 				}
-				if (diff == 1) {
-					prime = false;
-					Minterm mT(implicantIndex, implicantBit);
-					bool dupe = false;
-					for (Minterm m : primeImplicants) {
-						if (m.equals(mT)) {
-							dupe = true;
-						}
-					}
-					if (!dupe) {
-						primeImplicants.push_back(mT);
-						didWork = true;
-					}
+				else {
+					cBits.push_back(minTerms[i].getBits()[k]);
 				}
-				if (prime) {
-					primeImplicants.push_back(minTerms[i]);
+			}
+			if (diff == 1) {
+				minTerms[i].setCombined(true);
+				minTerms[j].setCombined(true);
+				Minterm m(cIndex, cBits);
+				if (!contains(primeImplicants, m)) {
+					primeImplicants.push_back(m);
 				}
 			}
 		}
-		
 	}
-	if (didWork) {
-		return getPrimeImplicants(primeImplicants);
+	unsigned noCombineCount = 0;
+	for (unsigned i = 0; i < minTerms.size(); i++) {
+		if (!minTerms[i].wasCombined()) {
+			noCombineCount++;
+			primeImplicants.push_back(minTerms[i]);
+		}
 	}
-	else {
+	if (noCombineCount == minTerms.size()) {
 		return primeImplicants;
 	}
+	else {
+		return getPrimeImplicants(primeImplicants);
+	}
 }
+
+/*
+string Truthtable::getSimplifiedTerm(vector<int> indices, vector<Minterm> primeImplicants) {
+	vector<vector<vector<int>>> sums;
+	for (unsigned i = 0; i < indices.size(); i++) {
+		vector<vector<int>> sum;
+		for (unsigned j = 0; j < primeImplicants.size(); j++) {
+			if (contains(primeImplicants[j].getIndices(), indices[i])) {
+				vector<int> product;
+				product.push_back(j);
+				sum.push_back(product);
+			}
+		}
+		sums.push_back(sum);
+	}
+
+}
+*/
+
+/*
+vector<vector<vector<int>>> Truthtable::multiply(vector<vector<vector<int>>> prev) {
+	vector<vector<vector<int>>> next;
+	if (prev.size() == 1) {
+		return prev;
+	}
+	else {
+		vector<vector<int>> a = prev[0];
+		vector<vector<int>> b = prev[1];
+		vector<vector<int>> c;
+		for (vector<int> v1 : a) {
+			for (vector<int> v2 : b) {
+				c.push_back(joinVectorNoDupes(v1, v2));
+			}
+		}
+		next.push_back(c);
+		for (unsigned i = 2; i < prev.size(); i++) {
+			next.push_back(prev[i]);
+		}
+		return multiply(next);
+	}
+}
+*/
+
+/*
+vector<vector<int>> Truthtable::absorb(vector<vector<int>> prev) {
+	for (unsigned i = 0; i < prev.size(); i++) {
+		for (unsigned j = 0; j < prev.size(); j++) {
+			bool sufficient = true;
+			for (unsigned k = 0; k < prev[j].size(); k++) {
+				if (!contains(prev[i], prev[j][k])) {
+					sufficient = false;
+				}
+			}
+			if (sufficient) {
+				if (prev[i].size() < prev[j].size()) {
+					
+				}
+			}
+		}
+	}
+}
+*/

@@ -149,6 +149,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Term.h" />
     <ClInclude Include="Truthtable.h" />
+    <ClInclude Include="VectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Boolify.cpp" />

@@ -6,17 +6,14 @@ class Minterm
 public:
 	Minterm(vector<int>, vector<char>);
 	~Minterm();
-	vector<int> getIndex() const;
-	vector<char> getBit() const;
-	void setPrime(bool);
-	bool isPrime() const;
+	vector<int> getIndices() const;
+	vector<char> getBits() const;
 	void setCombined(bool);
 	bool wasCombined() const;
-	bool equals(Minterm);
+	friend bool operator == (const Minterm& ma, const Minterm& mb);
 private:
-	bool prime;
 	bool combined;
-	vector<int> index;
-	vector<char> bit;
+	vector<int> indices;
+	vector<char> bits;
 };
 

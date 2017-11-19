@@ -4,6 +4,7 @@
 #include "Term.h"
 #include "RecursiveDecentParser.h"
 #include "Minterm.h"
+#include "VectorUtils.h"
 
 using std::string;
 using std::vector;
@@ -27,18 +28,8 @@ private:
 	void buildDNF();
 	void buildKNF();
 	vector<Minterm> getPrimeImplicants(vector<Minterm>);
-
-	template <typename T> vector<T> joinVectorNoDupes(vector<T> a, vector<T> b) {
-		vector<T> joined;
-		for (T x : a) {
-			joined.push_back(x);
-		}
-		for (T y : b) {
-			if (std::find(joined.begin(), joined.end(), y) == joined.end()) {
-				joined.push_back(y);
-			}
-		}
-		return joined;
-	}
+	string getSimplifiedTerm(vector<int>, vector<Minterm>);
+	vector<vector<vector<int>>> multiply(vector<vector<vector<int>>>);
+	vector<vector<int>> absorb(vector<vector<int>>);
 };
 
