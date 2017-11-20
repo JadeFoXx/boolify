@@ -2,6 +2,7 @@
 #include "Truthtable.h"
 #include <algorithm>
 #include "RecursiveDecentParser.h"
+#include <math.h>
 
 //////////////////////////////////////////////////
 Truthtable::Truthtable(Term t, RecursiveDecentParser rdp) : term(t), dnf(""), knf("")
@@ -156,7 +157,7 @@ vector<Minterm> Truthtable::getPrimeImplicants(vector<Minterm> minTerms) {
 	}
 }
 
-/*
+
 string Truthtable::getSimplifiedTerm(vector<int> indices, vector<Minterm> primeImplicants) {
 	vector<vector<vector<int>>> sums;
 	for (unsigned i = 0; i < indices.size(); i++) {
@@ -172,9 +173,9 @@ string Truthtable::getSimplifiedTerm(vector<int> indices, vector<Minterm> primeI
 	}
 
 }
-*/
 
-/*
+
+
 vector<vector<vector<int>>> Truthtable::multiply(vector<vector<vector<int>>> prev) {
 	vector<vector<vector<int>>> next;
 	if (prev.size() == 1) {
@@ -196,24 +197,21 @@ vector<vector<vector<int>>> Truthtable::multiply(vector<vector<vector<int>>> pre
 		return multiply(next);
 	}
 }
-*/
 
-/*
+
+
 vector<vector<int>> Truthtable::absorb(vector<vector<int>> prev) {
-	for (unsigned i = 0; i < prev.size(); i++) {
-		for (unsigned j = 0; j < prev.size(); j++) {
-			bool sufficient = true;
-			for (unsigned k = 0; k < prev[j].size(); k++) {
-				if (!contains(prev[i], prev[j][k])) {
-					sufficient = false;
-				}
-			}
-			if (sufficient) {
-				if (prev[i].size() < prev[j].size()) {
-					
-				}
-			}
+	vector<vector<int>> minimas;
+	int minSize = prev[0].size();
+	for (unsigned i = 1; i < prev.size(); i++) {
+		if (prev[i].size() < minSize) {
+			minSize = prev[i].size();
 		}
 	}
+	for (unsigned i = 0; i < prev.size(); i++) {
+		if (prev[i].size() == minSize) {
+			minimas.push_back(prev[i]);
+		}
+	}
+
 }
-*/
