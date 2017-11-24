@@ -10,6 +10,7 @@ public:
 	vector<char> getBits() const;
 	void setCombined(bool);
 	bool wasCombined() const;
+	int literalCount() const;
 	friend bool operator == (const Minterm& ma, const Minterm& mb);
 private:
 	bool combined;

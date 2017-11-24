@@ -31,6 +31,18 @@ bool Minterm::wasCombined() const {
 	return combined;
 }
 
+//////////////////////////////////////////////////
+int Minterm::literalCount() const {
+	int counter = 0;
+	for (char c : bits) {
+		if (c != '-') {
+			counter++;
+		}
+	}
+	return counter;
+}
+
+//////////////////////////////////////////////////
 bool operator==(const Minterm& ma, const Minterm& mb) {
 	return ma.getBits() == mb.getBits();
 }
