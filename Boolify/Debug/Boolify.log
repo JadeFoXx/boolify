@@ -1,21 +1,21 @@
 ﻿  stdafx.cpp
   Truthtable.cpp
-e:\code\current\boolify\boolify\truthtable.cpp(31): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(40): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(42): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(60): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(85): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(88): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(96): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(249): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\truthtable.cpp(253): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\truthtable.cpp(30): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\truthtable.cpp(39): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\truthtable.cpp(41): warning C4018: '<': signed/unsigned mismatch
   Term.cpp
-  RecursiveDecentParser.cpp
-e:\code\current\boolify\boolify\recursivedecentparser.cpp(39): warning C4018: '<': signed/unsigned mismatch
   Minterm.cpp
+  LogicEngine.cpp
+e:\code\current\boolify\boolify\logicengine.cpp(38): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(114): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(140): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(143): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(151): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(303): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\logicengine.cpp(307): warning C4018: '<': signed/unsigned mismatch
   Boolify.cpp
-e:\code\current\boolify\boolify\boolify.cpp(32): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\boolify.cpp(38): warning C4018: '<': signed/unsigned mismatch
-e:\code\current\boolify\boolify\boolify.cpp(39): warning C4018: '<=': signed/unsigned mismatch
+e:\code\current\boolify\boolify\boolify.cpp(31): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\boolify.cpp(37): warning C4018: '<': signed/unsigned mismatch
+e:\code\current\boolify\boolify\boolify.cpp(38): warning C4018: '<=': signed/unsigned mismatch
   Generating Code...
   Boolify.vcxproj -> E:\Code\Current\boolify\Boolify\Debug\Boolify.exe

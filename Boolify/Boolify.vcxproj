@@ -143,8 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LogicEngine.h" />
     <ClInclude Include="Minterm.h" />
-    <ClInclude Include="RecursiveDecentParser.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Term.h" />
@@ -153,8 +153,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Boolify.cpp" />
+    <ClCompile Include="LogicEngine.cpp" />
     <ClCompile Include="Minterm.cpp" />
-    <ClCompile Include="RecursiveDecentParser.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
